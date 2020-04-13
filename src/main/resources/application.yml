@@ -5,6 +5,6 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/just_for_interview?useUnicode=true
     username: root
-    password: 521000
+    password: 1921622004qwer
 mybatis:
   mapper-locations: classpath:mapper/*.xml
