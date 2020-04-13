@@ -18,8 +18,4 @@ public class UserController {
     return this.userService.getUserById(id);
   }
 
-  @RequestMapping(value = "/test")
-  public String test() {
-    return "test";
-  }
 }
