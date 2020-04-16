@@ -12,11 +12,17 @@
     id, username, password, create_time, modify_time
   </sql>
 
-  <select id="getById" parameterType="String" resultMap="UserResultMap">
+  <select id="getById" parameterType="Integer" resultMap="UserResultMap">
     SELECT
     <include refid="User_Column_List"/>
     FROM user
     WHERE id = #{id}
+  </select>
+  <select id="getByUsername" parameterType="String" resultMap="UserResultMap">
+    SELECT
+    <include refid="User_Column_List"/>
+    FROM user
+    WHERE username = #{username}
   </select>
 
   <insert id="createUser" parameterType="com.awesome.justforinterview.model.User">
@@ -24,6 +30,6 @@
         user
         (id, username, password, create_time, modify_time)
         VALUES
-        (#{id}, #{username}, #{password}, #{creteTime}, #{modifyTime})
+        (#{id}, #{username}, #{password}, #{createTime}, #{modifyTime})
   </insert>
 </mapper>

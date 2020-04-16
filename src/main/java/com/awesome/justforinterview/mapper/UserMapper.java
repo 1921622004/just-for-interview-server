@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface UserMapper {
-  User getById(String id);
+  User getById(Integer id);
 
   void createUser(User user);
+
+  User getByUsername(String username);
 }

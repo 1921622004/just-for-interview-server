@@ -8,6 +8,7 @@ public class ResponseHelper {
     Map<String, Object> obj = new HashMap<String, Object>();
     obj.put("code", 200);
     obj.put("message", "success");
+    obj.put("success", true);
     obj.put("data", null);
     return obj;
   }
@@ -16,6 +17,7 @@ public class ResponseHelper {
     Map<String, Object> obj = new HashMap<String, Object>();
     obj.put("code", 200);
     obj.put("message", message);
+    obj.put("success", true);
     obj.put("data", data);
     return obj;
   }
@@ -24,13 +26,15 @@ public class ResponseHelper {
     Map<String, Object> obj = new HashMap<String, Object>();
     obj.put("code", 0);
     obj.put("message", "unknown error");
+    obj.put("success", false);
     obj.put("data", null);
     return obj;
   }
 
-  public static Object fail(String errorCode, String errorMessage) {
+  public static Object fail(int errorCode, String errorMessage) {
     Map<String, Object> obj = new HashMap<String, Object>();
     obj.put("code", errorCode);
+    obj.put("success", false);
     obj.put("message", errorMessage);
     obj.put("data", null);
     return obj;
