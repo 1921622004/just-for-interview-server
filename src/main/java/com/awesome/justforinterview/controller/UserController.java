@@ -39,20 +39,25 @@ public class UserController {
 
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public Object register(@RequestBody String requestBody) {
-    System.out.println(requestBody);
     String username = JacksonUtil.parseString(requestBody, "username");
     String password = JacksonUtil.parseString(requestBody, "password");
     if (username == null || password == null) {
       return ResponseHelper.fail(0, "missing argument");
     } else {
-      User user = new User();
-      user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
-      user.setCreateTime(new Date());
-      user.setModifyTime(new Date());
-      user.setPassword(password);
-      user.setUsername(username);
-      userService.createUser(user);
-      return ResponseHelper.success("register success", null);
+      User exsistUser = userService.getUserByUsername(username);
+      if (exsistUser == null) {
+        User user = new User();
+        user.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+        user.setCreateTime(new Date());
+        user.setModifyTime(new Date());
+        user.setPassword(password);
+        user.setUsername(username);
+        userService.createUser(user);
+        return ResponseHelper.success("register success", null);
+      } else {
+        return ResponseHelper.fail(0, "user alreay exsist");
+      }
+
     }
   }
 }
