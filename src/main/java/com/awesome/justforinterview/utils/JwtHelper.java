@@ -31,16 +31,16 @@ public class JwtHelper {
     return token;
   }
 
-  public static Integer getUserIdByToken(String token) {
+  public static String getUserIdByToken(String token) {
     try {
       Algorithm algorithm = Algorithm.HMAC256(SECRET);
       JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUSER).build();
       DecodedJWT jwt = verifier.verify(token);
       Map<String, Claim> claims = jwt.getClaims();
       Claim claim = claims.get("userId");
-      return claim.asInt();
+      return claim.asString();
     } catch (JWTVerificationException exception) {
-      return 0;
+      return null;
     }
   }
 

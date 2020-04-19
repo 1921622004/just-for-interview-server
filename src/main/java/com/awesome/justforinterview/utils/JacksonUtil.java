@@ -21,4 +21,20 @@ public class JacksonUtil {
       return null;
     }
   }
+
+  static public Integer parseInteger(String jsonString, String field) {
+    ObjectMapper objectMapper = new ObjectMapper();
+    JsonNode node;
+    try {
+      node = objectMapper.readTree(jsonString);
+      JsonNode leaf = node.get(field);
+      if (leaf != null) {
+        return leaf.asInt();
+      } else {
+        return null;
+      }
+    } catch (IOException err) {
+      return null;
+    }
+  }
 }
