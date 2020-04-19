@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.awesome.justforinterview.mapper.UserMapper">
+  <resultMap id="QuestionResultMap" type="com.awesome.justforinterview.model.User">
+    <id column="id" jdbcType="INT"/>
+    <result column="content" property="content" jdbcType="TEXT" />
+    <result column="raw_content" property="rawContent" jdbcType="TEXT" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="is_del" property="isDel" jdbcType="INT" />
+    <result column="collect_count" property="collectCount" jdbcType="INT" />
+    <result column="tag_id" property="tagId" jdbcType="INT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Question_Column_List">
+    id, content, raw_content, create_time, modify_time, is_del, collect_count, tag_id, title
+  </sql>
+
+  <select id="getById" parameterType="Integer" resultMap="QuestionResultMap">
+    SELECT
+    <include refid="Question_Column_List"/>
+    FROM question
+    WHERE id = #{id}
+  </select>
+
+  <insert id="createQuestion" parameterType="com.awesome.justforinterview.model.Question" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO
+        user
+        (content, raw_content, create_time, modify_time, tag_id, title, user_id)
+        VALUES
+        (#{content}, #{raw_content}, #{createTime}, #{modifyTime}, #{tagTd}, #{title}, #{userId})
+  </insert>
+
+  <update id="updateQuestion" parameterType="com.awesome.justforinterview.model.Question">
+    update question
+    set content = #{content}, raw_content = #{rawContent}, modify_time = #{modifyTime}, title = #{title}, is_del = #{idDel}
+  </update>
+</mapper>

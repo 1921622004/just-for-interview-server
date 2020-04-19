@@ -1,0 +1,43 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.awesome.justforinterview.mapper.UserMapper">
+  <resultMap id="TagResultMap" type="com.awesome.justforinterview.model.Tag">
+    <id column="tag_code" jdbcType="VARCHAR"/>
+    <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="modify_time" property="modifyTime" jdbcType="DATE" />
+    <result column="parent_code" property="parentCode" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <sql id="Tag_Column_List">
+    tag_code, tag_name, description, create_time, modify_time, parent_code
+  </sql>
+
+  <select id="getByTagCode" parameterType="String" resultMap="TagResultMap">
+    SELECT
+    <include refid="User_Column_List"/>
+    FROM tag
+    WHERE tag_code = #{tagCode}
+  </select>
+
+  <select id="getChildrenByTagCode" parameterType="String" resultMap="TagResultMap">
+    SELECT
+    <include refid="User_Column_List"/>
+    FROM tag
+    WHERE parent_code = #{tagCode}
+  </select>
+
+  <insert id="createTag" parameterType="com.awesome.justforinterview.model.Tag">
+    INSERT INTO
+        user
+        (tag_code, tag_name, description, create_time, modify_time, parent_code)
+        VALUES
+        (#{tagCode}, #{tagName}, #{description}, #{createTime}, #{modifyTime}, #{parentCode})
+  </insert>
+
+  <update id="modifyTag" parameterType="com.awesome.justforinterview.model.Tag">
+    UPDATE question
+    SET tag_name = #{tagName}, description = #{description}, modify_time = #{modifyTime}
+  </update>
+</mapper>
