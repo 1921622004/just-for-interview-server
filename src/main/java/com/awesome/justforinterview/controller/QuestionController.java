@@ -21,7 +21,7 @@ public class QuestionController {
   @Autowired
   private UserService userService;
 
-  @RequestMapping(value = "/detail/${id}")
+  @RequestMapping(value = "/detail/{id}")
   public Question getQuestionDetail(@PathVariable Integer id) {
     return this.questionService.getQuestionById(id);
   }

@@ -27,4 +27,8 @@ public class TagService {
   public void modifyTag(Tag tag) {
     tagMapper.modifyTag(tag);
   }
+
+  public List<Tag> getAllParentTag() {
+    return tagMapper.getAllParentTag();
+  }
 }

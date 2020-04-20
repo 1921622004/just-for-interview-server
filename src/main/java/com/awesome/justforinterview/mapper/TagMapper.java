@@ -16,4 +16,6 @@ public interface TagMapper {
   void createTag(Tag tag);
 
   void modifyTag(Tag tag);
+
+  List<Tag> getAllParentTag();
 }

@@ -19,6 +19,7 @@ public class UserController {
 
   @RequestMapping(value = "/detail/{id}")
   public User getUserById(@PathVariable String id) {
+    // TODO: 2020/4/20 修复 
     return this.userService.getUserById(id);
   }
 

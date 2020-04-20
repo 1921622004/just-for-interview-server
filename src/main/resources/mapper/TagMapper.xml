@@ -1,5 +1,5 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.awesome.justforinterview.mapper.UserMapper">
+<mapper namespace="com.awesome.justforinterview.mapper.TagMapper">
   <resultMap id="TagResultMap" type="com.awesome.justforinterview.model.Tag">
     <id column="tag_code" jdbcType="VARCHAR"/>
     <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
@@ -16,28 +16,35 @@
 
   <select id="getByTagCode" parameterType="String" resultMap="TagResultMap">
     SELECT
-    <include refid="User_Column_List"/>
+    <include refid="Tag_Column_List"/>
     FROM tag
     WHERE tag_code = #{tagCode}
   </select>
 
+  <select id="getAllParentTag" resultMap="TagResultMap">
+    SELECT
+    *
+    FROM tag
+    WHERE parent_code is null;
+  </select>
+
   <select id="getChildrenByTagCode" parameterType="String" resultMap="TagResultMap">
     SELECT
-    <include refid="User_Column_List"/>
+    <include refid="Tag_Column_List"/>
     FROM tag
     WHERE parent_code = #{tagCode}
   </select>
 
   <insert id="createTag" parameterType="com.awesome.justforinterview.model.Tag">
     INSERT INTO
-        user
+        tag
         (tag_code, tag_name, description, create_time, modify_time, parent_code)
         VALUES
         (#{tagCode}, #{tagName}, #{description}, #{createTime}, #{modifyTime}, #{parentCode})
   </insert>
 
   <update id="modifyTag" parameterType="com.awesome.justforinterview.model.Tag">
-    UPDATE question
+    UPDATE tag
     SET tag_name = #{tagName}, description = #{description}, modify_time = #{modifyTime}
   </update>
 </mapper>
