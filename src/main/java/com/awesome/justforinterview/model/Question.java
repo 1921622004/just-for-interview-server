@@ -17,7 +17,7 @@ public class Question {
 
   private int collectCount;
 
-  private int tagId;
+  private int tagCode;
 
   private String title;
 
@@ -59,8 +59,8 @@ public class Question {
     return collectCount;
   }
 
-  public int getTagId() {
-    return tagId;
+  public int getTagCode() {
+    return tagCode;
   }
 
   public String getTitle() {
@@ -83,6 +83,10 @@ public class Question {
     this.createTime = createTime;
   }
 
+  public void setTagCode(int tagCode) {
+    this.tagCode = tagCode;
+  }
+
   public void setModifyTime(Date modifyTime) {
     this.modifyTime = modifyTime;
   }
@@ -93,10 +97,6 @@ public class Question {
 
   public void setCollectCount(int collectCount) {
     this.collectCount = collectCount;
-  }
-
-  public void setTagId(int tagId) {
-    this.tagId = tagId;
   }
 
   public void setTitle(String title) {

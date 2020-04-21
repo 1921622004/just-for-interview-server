@@ -8,7 +8,7 @@
     <result column="modify_time" property="modifyTime" jdbcType="DATE" />
     <result column="is_del" property="isDel" jdbcType="INTEGER" />
     <result column="collect_count" property="collectCount" jdbcType="INTEGER" />
-    <result column="tag_id" property="tagId" jdbcType="INTEGER" />
+    <result column="tag_code" property="tagCode" jdbcType="VARCHAR" />
     <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
   </resultMap>
