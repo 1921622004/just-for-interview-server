@@ -3,10 +3,7 @@ package com.awesome.justforinterview.controller;
 import com.awesome.justforinterview.service.TagService;
 import com.awesome.justforinterview.utils.ResponseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/tag")
