@@ -8,23 +8,27 @@ import com.awesome.justforinterview.utils.ResponseHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
+  static final Integer tokenMaxAge = 24 * 3600;
+
   @Autowired
   private UserService userService;
 
   @RequestMapping(value = "/detail/{id}")
   public User getUserById(@PathVariable String id) {
-    // TODO: 2020/4/20 修复 
+    // TODO: 2020/4/20 修复
     return this.userService.getUserById(id);
   }
 
   @RequestMapping(value = "/login", method = RequestMethod.POST)
-  public Object login(@RequestBody String requestBody) {
+  public Object login(@RequestBody String requestBody, HttpServletResponse response) {
     String username = JacksonUtil.parseString(requestBody, "username");
     String password = JacksonUtil.parseString(requestBody, "password");
     if (username == null || password == null) {
@@ -34,7 +38,12 @@ public class UserController {
     if (user == null) {
       return ResponseHelper.fail(0, "user not found");
     } else {
-      return ResponseHelper.success("login success", JwtHelper.createToken(user.getId()));
+      System.out.println(user.getId());
+      Cookie cookie = new Cookie("jwt-token", JwtHelper.createToken(user.getId()));
+      cookie.setMaxAge(tokenMaxAge);
+      cookie.setPath("/");
+      response.addCookie(cookie);
+      return ResponseHelper.success("login success", null);
     }
   }
 

@@ -27,24 +27,27 @@ public class QuestionController {
   }
 
   @RequestMapping(value = "/create", method = RequestMethod.POST)
-  public Object createQuestion(@RequestBody String requestBody, @RequestHeader("jwt-token") String token) {
+  public Object createQuestion(@RequestBody String requestBody, @CookieValue("jwt-token") String token) {
     String userId = JwtHelper.getUserIdByToken(token);
+    System.out.println(userId);
     if (userId == null) {
       return ResponseHelper.fail(403, "can't find user");
     }
     String content = JacksonUtil.parseString(requestBody, "content");
     String rawContent = JacksonUtil.parseString(requestBody, "rawContent");
     String title = JacksonUtil.parseString(requestBody, "title");
-    Integer tagId = JacksonUtil.parseInteger(requestBody, "tagId");
+    String parentTagCode = JacksonUtil.parseString(requestBody, "parentTagCode");
+    String tagCodes = JacksonUtil.parseString(requestBody, "tagCodes");
     Question question = new Question();
     question.setContent(content);
     question.setRawContent(rawContent);
     Date nowDate = new Date();
     question.setCreateTime(nowDate);
     question.setModifyTime(nowDate);
-    question.setTagId(tagId);
+    question.setParentTagCode(parentTagCode);
     question.setTitle(title);
     question.setUserId(userId);
+    question.setTagCodes(tagCodes);
     Integer id = questionService.createQuestion(question);
     return ResponseHelper.success("create success", id);
   }

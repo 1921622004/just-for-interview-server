@@ -1,6 +1,7 @@
 package com.awesome.justforinterview.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Question {
   private int id;
@@ -17,11 +18,17 @@ public class Question {
 
   private int collectCount;
 
-  private int tagCode;
+  private String parentTagCode;
 
   private String title;
 
   private String userId;
+
+  private String tagCodes;
+
+  public String getTagCodes() {
+    return tagCodes;
+  }
 
   public int getId() {
     return id;
@@ -59,8 +66,8 @@ public class Question {
     return collectCount;
   }
 
-  public int getTagCode() {
-    return tagCode;
+  public String getParentTagCode() {
+    return parentTagCode;
   }
 
   public String getTitle() {
@@ -83,8 +90,8 @@ public class Question {
     this.createTime = createTime;
   }
 
-  public void setTagCode(int tagCode) {
-    this.tagCode = tagCode;
+  public void setParentTagCode(String parentTagCode) {
+    this.parentTagCode = parentTagCode;
   }
 
   public void setModifyTime(Date modifyTime) {
@@ -102,4 +109,9 @@ public class Question {
   public void setTitle(String title) {
     this.title = title;
   }
+
+  public void setTagCodes(String tagCodes) {
+    this.tagCodes = tagCodes;
+  }
+
 }
